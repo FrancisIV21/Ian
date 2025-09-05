@@ -98,8 +98,8 @@ export const personalInfo = {
   email: 'villacicafrancisian@gmail.com',
   description: 'I create digital experiences that are beautiful, functional, and user-centered. Passionate about clean code and innovative solutions.',
   bio: [
-    "Hi, Francis Ian Villacica, a passionate Web developer with over 2 years of experience building web applications that make a difference. I specialize in creating scalable, user-friendly solutions using modern technologies.",
+    "Hi, I'm Francis Ian Villacica, a passionate Web developer with over 2 years of experience building web applications that make a difference. I specialize in creating scalable, user-friendly solutions using modern technologies.",
     "My journey started during my Computer Engineering studies, where I discovered my love for both frontend aesthetics and backend architecture. I believe great software is born from the perfect balance of technical excellence and user experience.",
-    "When I'm not coding, you'll find me actively playing video games, writing technical articles, or exploring the latest web technologies."
+    "When I'm not coding, you'll find me actively playing video games, reading novels, or exploring the latest web technologies."
   ]
 };

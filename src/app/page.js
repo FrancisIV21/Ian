@@ -83,15 +83,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="h-screen flex flex-col justify-center px-4">
+      {/* Contact + Footer Section */}
+      <section id="contact" className="min-h-screen flex flex-col px-4">
+        {/* Contact fills available space */}
         <div className="max-w-7xl w-full mx-auto flex-1 flex items-center">
           <Contact />
         </div>
-        {/* Footer integrated into contact section */}
+
+        {/* Footer always at bottom */}
         <div className="max-w-7xl w-full mx-auto pb-8">
-          <footer className="text-center text-gray-600 border-t border-gray-200 pt-8 mt-8">
-            <p>&copy; 2024 IAN. All rights reserved.</p>
+          <footer className="text-center text-gray-600 border-t border-gray-200 pt-8">
+            <p>&copy; 2025 IAN. All rights reserved.</p>
           </footer>
         </div>
       </section>
