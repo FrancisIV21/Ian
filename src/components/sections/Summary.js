@@ -9,7 +9,7 @@ export default function Summary() {
       {/* Text Section */}
       <div className="max-w-xl">
         <h2 className="text-5xl font-bold mb-6">Recently,</h2>
-        <p className="text-lg leading-relaxed text-gray-700">
+        <p className="text-lg leading-relaxed text-black-700 font-suisse-mono">
           I've built Websites for local resorts and businesses ranging from 
           marketing websites to complex solutions and enterprise
           apps with a strong focus on fast, elegant, and accessible user
