@@ -21,14 +21,39 @@ export default function Projects() {
     { key: 'personal', label: 'Personal Projects' }
   ];
 
+  // Map of project order → logo + floating preview + redirect URL
+  const projectAssets = [
+    {
+      logo: '/images/gmbly.png',
+      preview: '/images/gmbly-bg.png',
+      url: 'https://gmbly-microsaas-d2fjvvk82vjt19u8ddeg.lp.dev/',
+    },
+    {
+      logo: '/images/jobtracked.png',
+      preview: '/images/jobtracked-bg.png',
+      url: 'https://jobtracked.vercel.app/',
+    },
+    {
+      logo: '/images/infonest.png',
+      preview: '/images/infonest-bg.png',
+      url: 'https://staging-personal-knowledge-base-rdbi.frontend.encr.app/',
+    },
+    {
+      logo: '/images/hotel.png',
+      preview: '/images/hotel-bg.png',
+      url: 'https://francisiv21.github.io/Hotel-name-Website/',
+    },
+    {
+      logo: null, // still text for now
+      preview: '/images/portfolio.png',
+      url: 'https://ian-umber.vercel.app',
+    },
+  ];
+
   return (
     <div className="pt-20">
       <Section>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-        >
+        <motion.div initial="hidden" animate="visible" variants={stagger}>
           <motion.h1 
             className="text-4xl md:text-5xl font-viola text-black mb-8"
             variants={fadeIn}
@@ -61,74 +86,84 @@ export default function Projects() {
           </motion.div>
 
           {/* Projects Grid */}
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={stagger}
-          >
-            {filteredProjects.map((project) => (
-              <motion.div key={project.id} variants={fadeIn}>
-                <div className="relative group">
-                  {/* Card with shadow effect */}
-                  <div className="relative">
-                    {/* Shadow element */}
-                    <div
-                      className="
-                        absolute inset-0
-                        translate-x-[4px] translate-y-[4px]
-                        bg-black border border-black
-                        opacity-0 group-hover:opacity-100
-                        transition-opacity duration-200
-                      "
-                    />
-                    
-                    {/* Main card */}
-                    <motion.div
-                      initial={{ x: 0, y: 0 }}
-                      whileHover={{ x: -2, y: -2 }}
-                      whileTap={{ x: -1, y: -1 }}
-                      transition={{ duration: 0.18, ease: 'easeOut' }}
-                      className="relative z-10 border border-black aspect-square cursor-pointer p-4 flex flex-col items-center justify-center text-center"
-                      style={{ backgroundColor: '#f0ede6' }}
-                      onClick={() => window.open(project.liveUrl, '_blank')}
-                    >
-                      {/* Centered content */}
-                      <div>
-                        <h3 className="text-lg font-suisse-bold text-black mb-3 line-clamp-2">
-                          {project.title}
-                        </h3>
-                        <div className="flex flex-wrap justify-center gap-2">
-                          {project.tags.slice(0, 3).map((tag) => (
-                            <span 
-                              key={tag}
-                              className="px-2 py-1 bg-black-5 text-black font-suisse-mono text-xs"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={stagger}>
+            {filteredProjects.map((project, index) => {
+              const assets = projectAssets[index] || {};
+              return (
+                <motion.div key={project.id} variants={fadeIn}>
+                  <div className="relative group">
+                    {/* Card with shadow effect */}
+                    <div className="relative">
+                      {/* Shadow element */}
+                      <div
+                        className="
+                          absolute inset-0
+                          translate-x-[4px] translate-y-[4px]
+                          bg-black border border-black
+                          opacity-0 group-hover:opacity-100
+                          transition-opacity duration-200
+                        "
+                      />
+                      
+                      {/* Main card */}
+                      <motion.div
+                        initial={{ x: 0, y: 0 }}
+                        whileHover={{ x: -2, y: -2 }}
+                        whileTap={{ x: -1, y: -1 }}
+                        transition={{ duration: 0.18, ease: 'easeOut' }}
+                        className="relative z-10 border border-black aspect-square cursor-pointer p-4 flex flex-col items-center justify-center text-center"
+                        style={{ backgroundColor: '#f0ede6' }}
+                        onClick={() => window.open(assets.url || project.liveUrl, '_blank')}
+                      >
+                        {/* Centered content */}
+                        <div>
+                          {assets.logo ? (
+                            <img 
+                              src={assets.logo} 
+                              alt={project.title} 
+                              className="mx-auto max-h-12 object-contain mb-3"
+                            />
+                          ) : (
+                            <h3 className="text-lg font-suisse-bold text-black mb-3 line-clamp-2">
+                              {project.title}
+                            </h3>
+                          )}
+                          <div className="flex flex-wrap justify-center gap-2">
+                            {project.tags.slice(0, 3).map((tag) => (
+                              <span 
+                                key={tag}
+                                className="px-2 py-1 bg-black-5 text-black font-suisse-mono text-xs"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Redirect button */}
-                      <div className="mt-4">
-                        <ArrowUpRight 
-                          size={20} 
-                          className="text-black group-hover:text-brand-primary transition-colors" 
+                        {/* Redirect button */}
+                        <div className="mt-4">
+                          <ArrowUpRight 
+                            size={20} 
+                            className="text-black group-hover:text-brand-primary transition-colors" 
+                          />
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* Floating image preview on hover */}
+                    {assets.preview && (
+                      <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-2">
+                        <img 
+                          src={assets.preview} 
+                          alt={project.title}
+                          className="w-[28rem] h-auto object-cover border-2 border-black shadow-xl"
                         />
                       </div>
-                    </motion.div>
+                    )}
                   </div>
-
-                     {/* Floating image preview on hover */}
-                  <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-2">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-[28rem] h-auto object-cover border-2 border-black shadow-xl"
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </motion.div>
       </Section>

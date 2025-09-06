@@ -24,6 +24,9 @@ export default function Contact() {
       if (res.ok) {
         setStatus('Message sent successfully!');
         setForm({ name: '', email: '', message: '' });
+
+        // Clear status after 5 seconds
+        setTimeout(() => setStatus(''), 5000);
       } else {
         setStatus('Something went wrong. Try again.');
       }
