@@ -21,32 +21,37 @@ export default function Projects() {
     { key: 'personal', label: 'Personal Projects' }
   ];
 
-  // Map of project order → logo + floating preview + redirect URL
+  // Map of project order → logo + floating preview + redirect URL + tags
   const projectAssets = [
     {
       logo: '/images/gmbly.png',
       preview: '/images/gmbly-bg.png',
       url: 'https://gmbly-microsaas-d2fjvvk82vjt19u8ddeg.lp.dev/',
+      tags: null, // use default from projectsData
     },
     {
       logo: '/images/jobtracked.png',
       preview: '/images/jobtracked-bg.png',
       url: 'https://jobtracked.vercel.app/',
+      tags: ['React', 'Node.js', 'MongoDB'],
     },
     {
       logo: '/images/infonest.png',
       preview: '/images/infonest-bg.png',
       url: 'https://staging-personal-knowledge-base-rdbi.frontend.encr.app/',
+      tags: ['React', 'TypeScript', 'OpenAI API', 'PostgreSQL'],
     },
     {
       logo: '/images/hotel.png',
       preview: '/images/hotel-bg.png',
       url: 'https://francisiv21.github.io/Hotel-name-Website/',
+      tags: ['Vite', 'HTML', 'CSS', 'JavaScript'],
     },
     {
-      logo: null, // still text for now
+      logo: null,
       preview: '/images/portfolio.png',
       url: 'https://ian-umber.vercel.app',
+      tags: null,
     },
   ];
 
@@ -89,6 +94,8 @@ export default function Projects() {
           <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={stagger}>
             {filteredProjects.map((project, index) => {
               const assets = projectAssets[index] || {};
+              const tagsToShow = assets.tags || project.tags;
+              
               return (
                 <motion.div key={project.id} variants={fadeIn}>
                   <div className="relative group">
@@ -129,7 +136,7 @@ export default function Projects() {
                             </h3>
                           )}
                           <div className="flex flex-wrap justify-center gap-2">
-                            {project.tags.slice(0, 3).map((tag) => (
+                            {tagsToShow.slice(0, 4).map((tag) => (
                               <span 
                                 key={tag}
                                 className="px-2 py-1 bg-black-5 text-black font-suisse-mono text-xs"
